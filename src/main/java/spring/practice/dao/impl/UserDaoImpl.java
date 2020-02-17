@@ -1,7 +1,5 @@
 package spring.practice.dao.impl;
 
-import spring.practice.dao.UserDao;
-import spring.practice.model.User;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +7,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import spring.practice.dao.UserDao;
+import spring.practice.model.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -36,6 +36,15 @@ public class UserDaoImpl implements UserDao {
             return from_user.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Cat't get all users from DB", e);
+        }
+    }
+
+    public User getUsersbyId(Long userid) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM users WHERE user_id=:user_id", User.class)
+                    .setParameter("user_id", userid).getSingleResult();
+        } catch (Exception e) {
+            throw new RuntimeException("Cat't get user from DB", e);
         }
     }
 }

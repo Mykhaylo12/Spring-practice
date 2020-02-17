@@ -1,10 +1,10 @@
 package spring.practice.service.impl;
 
+import java.util.List;
+import org.springframework.stereotype.Service;
 import spring.practice.dao.UserDao;
 import spring.practice.model.User;
 import spring.practice.service.UserService;
-import java.util.List;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,5 +20,10 @@ public class UserServiceImpl implements UserService {
 
     public List<User> getListOfUsers() {
         return userDao.getListOfUsers();
+    }
+
+    @Override
+    public User getUsersbyId(Long id) {
+        return userDao.getUsersbyId(id);
     }
 }

@@ -1,10 +1,12 @@
 package spring.practice.service;
 
-import spring.practice.model.User;
 import java.util.List;
+import spring.practice.model.User;
 
 public interface UserService {
-        void add(User user);
-      
-        List<User> getListOfUsers();
-    }
+    void add(User user);
+
+    List<User> getListOfUsers();
+
+    User getUsersbyId(Long id);
+}
