@@ -5,7 +5,6 @@ import spring.practice.model.User;
 import spring.practice.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,12 +38,9 @@ public class UserController {
     }
 
     @GetMapping("/get/{userId}")
-    UserResponseDto getById(@PathVariable Long userId) {
-        List<User> userList = userService.getListOfUsers();
-        User tempUser = userList.stream()
-                .filter(u -> u.getId().equals(userId)).findFirst()
-                .orElseThrow(NoSuchElementException::new);
-        return new UserResponseDto(tempUser.getEmail(), tempUser.getPassword());
+    public UserResponseDto getByUserId(@PathVariable Long userId) {
+        User user = userService.getUsersbyId(userId);
+        return new UserResponseDto(user.getEmail(), user.getPassword());
     }
 
     @GetMapping("/")
