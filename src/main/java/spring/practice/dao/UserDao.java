@@ -1,7 +1,7 @@
 package spring.practice.dao;
 
-import spring.practice.model.User;
 import java.util.List;
+import spring.practice.model.User;
 
 public interface UserDao {
     public void add(User user);

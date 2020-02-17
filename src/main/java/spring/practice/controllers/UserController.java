@@ -1,14 +1,14 @@
 package spring.practice.controllers;
 
-import spring.practice.dto.UserResponseDto;
-import spring.practice.model.User;
-import spring.practice.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import spring.practice.dto.UserResponseDto;
+import spring.practice.model.User;
+import spring.practice.service.UserService;
 
 @RestController
 @RequestMapping("/user")
@@ -47,11 +47,7 @@ public class UserController {
     List<UserResponseDto> getAll() {
         List<UserResponseDto> listOfDtoUsers = new ArrayList<>();
         List<User> listOfUsers = userService.getListOfUsers();
-        for (User user : listOfUsers) {
-            UserResponseDto userResponseDto
-                    = new UserResponseDto(user.getEmail(), user.getPassword());
-            listOfDtoUsers.add(userResponseDto);
-        }
+        listOfUsers.forEach(u -> new UserResponseDto(u.getEmail(), u.getPassword()));
         return listOfDtoUsers;
     }
 }
